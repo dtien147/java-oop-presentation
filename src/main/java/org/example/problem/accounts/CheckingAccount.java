@@ -5,7 +5,7 @@ import org.example.problem.Transaction;
 import java.util.Date;
 
 public class CheckingAccount extends BankAccount {
-    private double overdraftLimit;
+    public double overdraftLimit;
 
     public CheckingAccount(String accountNumber, double balance, double overdraftLimit) {
         super(accountNumber, balance);
@@ -14,6 +14,8 @@ public class CheckingAccount extends BankAccount {
 
     @Override
     public void withdraw(double amount) {
+        // Mistake: Overloading withdraw logic within a subclass, which may lead to code duplication if other accounts need custom logic.
+        // Solution: Use composition to add overdraft behavior, making it more reusable and configurable.
         if (balance + overdraftLimit >= amount) {
             balance -= amount;
             transactions.add(new Transaction("withdrawal", amount, new Date(), "Withdrawal with overdraft"));

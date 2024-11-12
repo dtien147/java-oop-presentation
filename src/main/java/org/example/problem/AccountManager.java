@@ -14,6 +14,8 @@ public class AccountManager {
     public BankAccount createAccount(String type, String customerName, double initialBalance, double additionalInfo) {
         BankAccount account;
 
+        // Mistake: Using conditional statements to determine account type.
+        // Solution: Use a factory pattern or interface-based design for better extensibility.
         switch (type) {
             case "checking":
                 account = new CheckingAccount("CHK" + System.currentTimeMillis(), initialBalance, additionalInfo);
